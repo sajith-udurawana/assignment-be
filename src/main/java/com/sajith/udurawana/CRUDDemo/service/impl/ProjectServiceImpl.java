@@ -1,17 +1,22 @@
 package com.sajith.udurawana.CRUDDemo.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import com.sajith.udurawana.CRUDDemo.dto.ProjectDTO;
 import com.sajith.udurawana.CRUDDemo.entity.Project;
 import com.sajith.udurawana.CRUDDemo.exception.ProjectNotFoundException;
 import com.sajith.udurawana.CRUDDemo.mapper.ProjectMapper;
 import com.sajith.udurawana.CRUDDemo.repository.ProjectRepository;
 import com.sajith.udurawana.CRUDDemo.service.ProjectService;
+
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+/**
+ * Implementation of the ProjectService interface for managing projects.
+ */
 @Service
 @AllArgsConstructor
 public class ProjectServiceImpl implements ProjectService {

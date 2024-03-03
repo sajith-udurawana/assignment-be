@@ -19,6 +19,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
+/**
+ * Implementation of the JwtService interface for JWT token handling.
+ * Manages token extraction, generation, and validation.
+ */
 @Service
 public class JwtServiceImpl implements JwtService {
     @Value("${app.security.secret}")

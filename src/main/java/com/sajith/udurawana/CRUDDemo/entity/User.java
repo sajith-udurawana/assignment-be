@@ -12,6 +12,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Represents a user entity.
+ * This class is mapped to the "users" table in the database.
+ * Implements UserDetails interface for Spring Security.
+ * 
+ * @param id       The unique identifier of the user.
+ * @param email    The email address of the user.
+ * @param password The password associated with the user's account.
+ * @param role     The role of the user.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
