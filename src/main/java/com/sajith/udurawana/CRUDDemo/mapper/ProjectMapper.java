@@ -11,7 +11,7 @@ public class ProjectMapper {
         return new ProjectDTO(project.getId(), project.getName(), project.getDescription(), project.getMapURL());
     }
 
-    public static Project mapToEmployee(ProjectDTO dto) {
+    public static Project mapToProject(ProjectDTO dto) {
         return new Project(
                 dto.getId(),
                 dto.getName(),

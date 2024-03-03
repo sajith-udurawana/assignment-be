@@ -24,7 +24,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectDTO createProject(ProjectDTO dto) {
-        Project project = ProjectMapper.mapToEmployee(dto);
+        Project project = ProjectMapper.mapToProject(dto);
         Project savedProject = projectRepository.save(project);
         return ProjectMapper.mapToProjectDTO(savedProject);
     }

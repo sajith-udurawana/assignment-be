@@ -1,7 +1,14 @@
 package com.sajith.udurawana.CRUDDemo;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import com.sajith.udurawana.CRUDDemo.entity.RegisterRequest;
+import com.sajith.udurawana.CRUDDemo.entity.Role;
+import com.sajith.udurawana.CRUDDemo.repository.UserRepository;
+import com.sajith.udurawana.CRUDDemo.service.AuthService;
 
 @SpringBootApplication
 public class CrudDemoApplication {
@@ -11,17 +18,17 @@ public class CrudDemoApplication {
 	}
 
 	/**
-	 * CommandLineRunner bean for testing user registration.
-	 * Registers a user with predefined credentials and prints the generated token.
-	 * Uncomment and configure as needed for testing purposes.
+	 * CommandLineRunner bean for testing.
 	 */
-	// @Bean
-	// CommandLineRunner commandLineRunner(AuthService service) {
-	// return args -> {
-	// var user =
-	// RegisterRequest.builder().email("user@company.com").password("password")
-	// .role(Role.USER).build();
-	// System.out.print("Token: " + service.register(user).getToken());
-	// };
-	// }
+	@Bean
+	CommandLineRunner commandLineRunner(AuthService service, UserRepository userRepo) {
+		return args -> {
+			var users = userRepo.count();
+			if (users == 0) {
+				var user = RegisterRequest.builder().email("user@email.com").password("password")
+						.role(Role.USER).build();
+				System.out.print("Token: " + service.register(user).getToken());
+			}
+		};
+	}
 }
