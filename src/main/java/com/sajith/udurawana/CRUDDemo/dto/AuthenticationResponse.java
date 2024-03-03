@@ -1,4 +1,4 @@
-package com.sajith.udurawana.CRUDDemo.model;
+package com.sajith.udurawana.CRUDDemo.dto;
 
 import lombok.Builder;
 import lombok.Data;

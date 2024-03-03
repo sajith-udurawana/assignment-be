@@ -1,9 +1,9 @@
 package com.sajith.udurawana.CRUDDemo.controller;
 
-import com.sajith.udurawana.CRUDDemo.model.APIResponse;
+import com.sajith.udurawana.CRUDDemo.dto.APIResponse;
+import com.sajith.udurawana.CRUDDemo.dto.ResourceRequest;
 import com.sajith.udurawana.CRUDDemo.service.ResourceService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,16 +14,13 @@ import org.springframework.web.bind.annotation.*;
 public class ResourceController {
     private ResourceService resourceService;
 
-    // Get text data from a given URL. This is to avoid CORS errors when download
-    // map data.
-    @PostMapping(produces = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<APIResponse<String>> getKMLData(@RequestBody String url) {
+    @PostMapping("/kml")
+    public ResponseEntity<APIResponse<String>> getKML(@RequestBody ResourceRequest request) {
         try {
-            String data = resourceService.getResource(url);
-            System.out.println("Data: " + data);
+            String data = resourceService.getResource(request.getUrl());
             return ResponseEntity.ok(APIResponse.<String>builder().payload(data).build());
         } catch (Exception e) {
-            return ResponseEntity.ok(APIResponse.<String>builder().payload("").build());
+            return ResponseEntity.ok(APIResponse.<String>builder().error(e.getLocalizedMessage()).build());
         }
     }
 }

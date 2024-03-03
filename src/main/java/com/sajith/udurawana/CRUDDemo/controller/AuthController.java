@@ -3,8 +3,8 @@ package com.sajith.udurawana.CRUDDemo.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.sajith.udurawana.CRUDDemo.model.AuthenticationRequest;
-import com.sajith.udurawana.CRUDDemo.model.AuthenticationResponse;
+import com.sajith.udurawana.CRUDDemo.dto.AuthenticationRequest;
+import com.sajith.udurawana.CRUDDemo.dto.AuthenticationResponse;
 import com.sajith.udurawana.CRUDDemo.entity.RegisterRequest;
 import com.sajith.udurawana.CRUDDemo.service.AuthService;
 

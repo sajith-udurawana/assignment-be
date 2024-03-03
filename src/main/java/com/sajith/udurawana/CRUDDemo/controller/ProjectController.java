@@ -1,7 +1,7 @@
 package com.sajith.udurawana.CRUDDemo.controller;
 
 import com.sajith.udurawana.CRUDDemo.dto.ProjectDTO;
-import com.sajith.udurawana.CRUDDemo.model.APIResponse;
+import com.sajith.udurawana.CRUDDemo.dto.APIResponse;
 import com.sajith.udurawana.CRUDDemo.service.ProjectService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
