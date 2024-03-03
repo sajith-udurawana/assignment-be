@@ -22,12 +22,18 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectDTO createProject(ProjectDTO dto) {
         Project project = ProjectMapper.mapToEmployee(dto);
+        if (project == null) {
+            throw new ProjectNotFoundException("Unable to create project!");
+        }
         Project savedProject = projectRepository.save(project);
         return ProjectMapper.mapToProjectDTO(savedProject);
     }
 
     @Override
     public ProjectDTO getProjectById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Invalid id!");
+        }
         Project project = projectRepository.findById(id)
                 .orElseThrow(() -> new ProjectNotFoundException("Project with id %d not found!".formatted(id)));
         return ProjectMapper.mapToProjectDTO(project);
@@ -41,6 +47,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectDTO updateProject(Long id, ProjectDTO dto) {
+        if (id == null) {
+            throw new IllegalArgumentException("Invalid id!");
+        }
         Project project = projectRepository.findById(id)
                 .orElseThrow(() -> new ProjectNotFoundException("Project with id %d not found!".formatted(id)));
         project.setName(dto.getName());
@@ -52,6 +61,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void deleteProject(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Invalid id!");
+        }
         projectRepository.findById(id)
                 .orElseThrow(() -> new ProjectNotFoundException("Project with id %d not found!".formatted(id)));
         projectRepository.deleteById(id);
