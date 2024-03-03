@@ -5,8 +5,7 @@ import com.sajith.udurawana.CRUDDemo.dto.AuthenticationResponse;
 import com.sajith.udurawana.CRUDDemo.entity.RegisterRequest;
 
 public interface AuthService {
-    public AuthenticationResponse authenticate(AuthenticationRequest request);
+    AuthenticationResponse authenticate(AuthenticationRequest request);
 
-    public AuthenticationResponse register(RegisterRequest request);
-
+    AuthenticationResponse register(RegisterRequest request);
 }
