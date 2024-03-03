@@ -19,7 +19,8 @@ import lombok.AllArgsConstructor;
 public class ResourceController {
     private ResourceService resourceService;
 
-    // Get text data from a given URL
+    // Get text data from a given URL. This is to avoid CORS errors when download
+    // map data.
     @PostMapping(produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> postMethodName(@RequestBody String url) {
         try {

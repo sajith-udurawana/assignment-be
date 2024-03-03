@@ -13,7 +13,6 @@ public class ProjectMapper {
                 dto.getId(),
                 dto.getName(),
                 dto.getDescription(),
-                dto.getMapURL()
-        );
+                dto.getMapURL());
     }
 }
