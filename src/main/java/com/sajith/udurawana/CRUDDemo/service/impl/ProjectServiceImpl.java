@@ -1,18 +1,16 @@
 package com.sajith.udurawana.CRUDDemo.service.impl;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
 import com.sajith.udurawana.CRUDDemo.dto.ProjectDTO;
 import com.sajith.udurawana.CRUDDemo.entity.Project;
 import com.sajith.udurawana.CRUDDemo.exception.ProjectNotFoundException;
 import com.sajith.udurawana.CRUDDemo.mapper.ProjectMapper;
 import com.sajith.udurawana.CRUDDemo.repository.ProjectRepository;
 import com.sajith.udurawana.CRUDDemo.service.ProjectService;
-
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -22,9 +20,6 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectDTO createProject(ProjectDTO dto) {
         Project project = ProjectMapper.mapToEmployee(dto);
-        if (project == null) {
-            throw new ProjectNotFoundException("Unable to create project!");
-        }
         Project savedProject = projectRepository.save(project);
         return ProjectMapper.mapToProjectDTO(savedProject);
     }

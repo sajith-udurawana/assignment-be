@@ -1,16 +1,14 @@
 package com.sajith.udurawana.CRUDDemo.controller;
 
 import com.sajith.udurawana.CRUDDemo.dto.ProjectDTO;
+import com.sajith.udurawana.CRUDDemo.model.APIResponse;
 import com.sajith.udurawana.CRUDDemo.service.ProjectService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/projects")
@@ -21,38 +19,56 @@ public class ProjectController {
 
     // Add project
     @PostMapping
-    public ResponseEntity<ProjectDTO> createProject(@RequestBody ProjectDTO dto) {
-        ProjectDTO savedProject = projectService.createProject(dto);
-        return new ResponseEntity<>(savedProject, HttpStatus.CREATED);
+    public ResponseEntity<APIResponse<ProjectDTO>> createProject(@RequestBody ProjectDTO dto) {
+        try {
+            ProjectDTO savedProject = projectService.createProject(dto);
+            return ResponseEntity.ok(APIResponse.<ProjectDTO>builder().payload(savedProject).build());
+        } catch (Exception e) {
+            return ResponseEntity.ok(APIResponse.<ProjectDTO>builder().error(e.getLocalizedMessage()).build());
+        }
     }
 
     // Get project by ID
     @GetMapping("{id}")
-    public ResponseEntity<ProjectDTO> getProjectById(@PathVariable("id") Long id) {
-        ProjectDTO dto = projectService.getProjectById(id);
-        return ResponseEntity.ok(dto);
+    public ResponseEntity<APIResponse<ProjectDTO>> getProjectById(@PathVariable("id") Long id) {
+        try {
+            ProjectDTO dto = projectService.getProjectById(id);
+            return ResponseEntity.ok(APIResponse.<ProjectDTO>builder().payload(dto).build());
+        } catch (Exception e) {
+            return ResponseEntity.ok(APIResponse.<ProjectDTO>builder().error(e.getLocalizedMessage()).build());
+        }
     }
 
     // Get all projects
     @GetMapping
-    public ResponseEntity<List<ProjectDTO>> getAllProjects() {
-        List<ProjectDTO> projectDTOS = projectService.getProjects();
-        return ResponseEntity.ok(projectDTOS);
+    public ResponseEntity<APIResponse<List<ProjectDTO>>> getAllProjects() {
+        try {
+            List<ProjectDTO> projectDTOS = projectService.getProjects();
+            return ResponseEntity.ok(APIResponse.<List<ProjectDTO>>builder().payload(projectDTOS).build());
+        } catch (Exception e) {
+            return ResponseEntity.ok(APIResponse.<List<ProjectDTO>>builder().error(e.getLocalizedMessage()).build());
+        }
     }
 
     // Update project by ID
     @PutMapping("{id}")
-    public ResponseEntity<ProjectDTO> updateProject(@PathVariable("id") Long id, @RequestBody ProjectDTO dto) {
-        ProjectDTO updatedProject = projectService.updateProject(id, dto);
-        return ResponseEntity.ok(updatedProject);
+    public ResponseEntity<APIResponse<ProjectDTO>> updateProject(@PathVariable("id") Long id, @RequestBody ProjectDTO dto) {
+        try {
+            ProjectDTO updatedProject = projectService.updateProject(id, dto);
+            return ResponseEntity.ok(APIResponse.<ProjectDTO>builder().payload(updatedProject).build());
+        } catch (Exception e) {
+            return ResponseEntity.ok(APIResponse.<ProjectDTO>builder().error(e.getLocalizedMessage()).build());
+        }
     }
 
     // Delete project by ID
     @DeleteMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, String>> deleteProject(@PathVariable("id") Long id) {
-        projectService.deleteProject(id);
-        final Map<String, String> map = new HashMap<>();
-        map.put("message", "Project deleted successfully!");
-        return ResponseEntity.ok(map);
+    public ResponseEntity<APIResponse<String>> deleteProject(@PathVariable("id") Long id) {
+        try {
+            projectService.deleteProject(id);
+            return ResponseEntity.ok(APIResponse.<String>builder().payload("Success").build());
+        } catch (Exception e) {
+            return ResponseEntity.ok(APIResponse.<String>builder().error(e.getLocalizedMessage()).build());
+        }
     }
 }

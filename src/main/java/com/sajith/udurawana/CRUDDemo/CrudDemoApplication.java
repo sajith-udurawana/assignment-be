@@ -20,9 +20,9 @@ public class CrudDemoApplication {
 	@Bean
 	CommandLineRunner commandLineRunner(AuthService service) {
 		return args -> {
-			var user = RegisterRequest.builder().email("user@company.com").password("password")
-					.role(Role.USER).build();
-			System.out.print("Token: " + service.register(user).getToken());
+//			var user = RegisterRequest.builder().email("user@company.com").password("password")
+//					.role(Role.USER).build();
+//			System.out.print("Token: " + service.register(user).getToken());
 		};
 	}
 

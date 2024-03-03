@@ -1,16 +1,11 @@
 package com.sajith.udurawana.CRUDDemo.controller;
 
+import com.sajith.udurawana.CRUDDemo.model.APIResponse;
+import com.sajith.udurawana.CRUDDemo.service.ResourceService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.sajith.udurawana.CRUDDemo.service.ResourceService;
-
-import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/resources")
@@ -22,13 +17,13 @@ public class ResourceController {
     // Get text data from a given URL. This is to avoid CORS errors when download
     // map data.
     @PostMapping(produces = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<String> postMethodName(@RequestBody String url) {
+    public ResponseEntity<APIResponse<String>> getKMLData(@RequestBody String url) {
         try {
             String data = resourceService.getResource(url);
-            return ResponseEntity.ok(data);
+            System.out.println("Data: " + data);
+            return ResponseEntity.ok(APIResponse.<String>builder().payload(data).build());
         } catch (Exception e) {
-            System.out.println(e.getLocalizedMessage());
-            return ResponseEntity.ok("");
+            return ResponseEntity.ok(APIResponse.<String>builder().payload("").build());
         }
     }
 }

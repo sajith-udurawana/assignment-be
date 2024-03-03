@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "projects")
 public class Project {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
     @Column(nullable = false)
     private String name;

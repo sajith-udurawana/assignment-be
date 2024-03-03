@@ -1,13 +1,10 @@
 package com.sajith.udurawana.CRUDDemo.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.sajith.udurawana.CRUDDemo.entity.AuthenticationRequest;
-import com.sajith.udurawana.CRUDDemo.entity.AuthenticationResponse;
+import com.sajith.udurawana.CRUDDemo.model.AuthenticationRequest;
+import com.sajith.udurawana.CRUDDemo.model.AuthenticationResponse;
 import com.sajith.udurawana.CRUDDemo.entity.RegisterRequest;
 import com.sajith.udurawana.CRUDDemo.service.AuthService;
 
@@ -16,6 +13,7 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("/api/auth")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
 public class AuthController {
     private AuthService authService;
 
